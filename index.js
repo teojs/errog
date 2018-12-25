@@ -10,6 +10,7 @@ const ajax = function(data) {
   xmlhttp.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
   xmlhttp.send(JSON.stringify(data))
 }
+const types = ['log', 'info', 'debug', 'warn', 'error']
 class Errog {
   init(projectName, apikey) {
     const _console = {
@@ -26,36 +27,19 @@ class Errog {
     }
     window.addEventListener('error', event => {
       postParams.errMsg = event.message
+      postParams.type = 'error'
       ajax(postParams)
     })
-    console.log = function() {
-      postParams.errMsg = Array.prototype.slice.call(arguments, 0).join(' ')
-      ajax(postParams)
-      _console.log.apply(this, Array.prototype.slice.call(arguments, 0))
-    }
-    console.info = function() {
-      postParams.errMsg = Array.prototype.slice.call(arguments, 0).join(' ')
-      ajax(postParams)
-      _console.info.apply(this, Array.prototype.slice.call(arguments, 0))
-    }
-    console.debug = function() {
-      postParams.errMsg = Array.prototype.slice.call(arguments, 0).join(' ')
-      ajax(postParams)
-      _console.debug.apply(this, Array.prototype.slice.call(arguments, 0))
-    }
-    console.warn = function() {
-      postParams.errMsg = Array.prototype.slice.call(arguments, 0).join(' ')
-      ajax(postParams)
-      _console.warn.apply(this, Array.prototype.slice.call(arguments, 0))
-    }
-    console.error = function() {
-      postParams.errMsg = Array.prototype.slice.call(arguments, 0).join(' ')
-      ajax(postParams)
-      _console.error.apply(this, Array.prototype.slice.call(arguments, 0))
-    }
+    types.forEach(type => {
+      console[type] = function() {
+        _console[type].apply(this, Array.prototype.slice.call(arguments, 0))
+        postParams.errMsg = Array.prototype.slice.call(arguments, 0).join(' ')
+        postParams.type = type
+        ajax(postParams)
+      }
+    })
   }
 }
 const errog = new Errog()
 export const init = errog.init
 export default errog
-
