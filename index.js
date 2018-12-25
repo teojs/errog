@@ -6,7 +6,7 @@ const ajax = function(data) {
   } else {
     xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
   }
-  xmlhttp.open('POST', 'http://127.0.0.1:8822/errorLog/addErrLog', true)
+  xmlhttp.open('POST', 'http://api.teoxu.cn/errorLog/addErrLog', true)
   xmlhttp.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
   xmlhttp.send(JSON.stringify(data))
 }
