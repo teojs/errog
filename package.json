@@ -1,0 +1,23 @@
+{
+  "name": "errog",
+  "version": "0.1.0",
+  "description": "Console print collection",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teojs/errog.git"
+  },
+  "keywords": [
+    "error",
+    "console.log"
+  ],
+  "author": "Teo <cheesen.xu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teojs/errog/issues"
+  },
+  "homepage": "https://github.com/teojs/errog#readme"
+}
